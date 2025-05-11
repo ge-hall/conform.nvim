@@ -167,7 +167,8 @@ function M.format(options, callback)
     for _, client in pairs(clients) do
       local params = set_range(client, util.make_formatting_params(options.formatting_options))
       local result, err = request_sync(client, method, params, timeout_ms, bufnr)
-      if result and result.result then
+      if result and result.result and client.name ~= "volar" then
+        log.debug("Running LSP client on %s", client.name)
         local this_did_edit = apply_text_edits(
           result.result,
           bufnr,
