@@ -114,3 +114,4 @@
 ---@field notify_on_error? boolean Conform will notify you when a formatter errors (default true).
 ---@field notify_no_formatters? boolean Conform will notify you when no formatters are available for the buffer (default true).
 ---@field formatters? table<string, conform.FormatterConfigOverride|fun(bufnr: integer): nil|conform.FormatterConfigOverride> Custom formatters and overrides for built-in formatters.
+---@field excluded_lsp? table<string> Map of lsp servers to exclude from LSP formatting. (e.g. { "lua_ls" }).

@@ -42,8 +42,9 @@ end
 ---@param options table
 ---@return table[] clients
 function M.get_format_clients(options)
+  -- TODO: use options.lsp.exclude list to filter result from vim.lsp.get_clients(filter)
   local method = options.range and "textDocument/rangeFormatting" or "textDocument/formatting"
-
+  log.debug("Running LSP get_clients with %s", vim.inspect(options))
   local clients
   if vim.lsp.get_clients then
     clients = vim.lsp.get_clients({
@@ -51,6 +52,7 @@ function M.get_format_clients(options)
       bufnr = options.bufnr,
       name = options.name,
       method = method,
+      filter = options.filter,
     })
   else
     ---@diagnostic disable-next-line: deprecated
